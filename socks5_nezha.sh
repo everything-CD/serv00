@@ -1,8 +1,8 @@
 #!/bin/bash
 
 USER=$(whoami)
-WORKDIR="/home/${USER,,}/nezhapanel"
-SCRIPT="${WORKDIR}/dashboard"
+WORKDIR="/home/${USER,,}/.nezha-dashboard"
+SCRIPT="${WORKDIR}/start.sh"
 CRON_SCRIPT="nohup ${SCRIPT} >/dev/null 2>&1 &"
 
 echo "检查并添加 crontab 任务"
@@ -14,7 +14,7 @@ if [ -e "${SCRIPT}" ]; then
     (crontab -l; echo "@reboot pkill -f ${SCRIPT} || ${CRON_SCRIPT}") | crontab -
 
     (crontab -l | grep -F "* * pgrep -f ${SCRIPT} > /dev/null || ${CRON_SCRIPT}") || \
-    (crontab -l; echo "*/12 * * * * pgrep -f ${SCRIPT} > /dev/null || ${CRON_SCRIPT}") | crontab -
+    (crontab -l; echo "0 */12 * * * pgrep -f ${SCRIPT} > /dev/null || ${CRON_SCRIPT}") | crontab -
 else
     echo "脚本 ${SCRIPT} 不存在，无法设置 crontab 任务"
 fi
