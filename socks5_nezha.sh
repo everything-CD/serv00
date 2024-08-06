@@ -14,7 +14,7 @@ if [ -e "${SCRIPT}" ]; then
     (crontab -l; echo "@reboot pkill -f ${SCRIPT} || ${CRON_SCRIPT}") | crontab -
 
     (crontab -l | grep -F "* * pgrep -f ${SCRIPT} > /dev/null || ${CRON_SCRIPT}") || \
-    (crontab -l; echo "0 */12 * * * pgrep -f ${SCRIPT} > /dev/null || ${CRON_SCRIPT}") | crontab -
+    (crontab -l; echo "0 */1 * * * pgrep -f ${SCRIPT} > /dev/null || ${CRON_SCRIPT}") | crontab -
 else
     echo "脚本 ${SCRIPT} 不存在，无法设置 crontab 任务"
 fi
