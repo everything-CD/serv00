@@ -30,9 +30,9 @@ if [ -e "${SCRIPT}" ]; then
         (crontab -l; echo "*/12 * * * * pgrep -x \"nezha-agent\" > /dev/null || ${CRON_NEZHA}") | crontab -
     fi
 
-    # 每小时检查 Nezha Dashboard 是否运行
-    if ! crontab -l | grep -qF "0 * * * * pgrep -f ${SCRIPT} > /dev/null || ${CRON_SCRIPT}"; then
-        (crontab -l; echo "0 * * * * pgrep -f ${SCRIPT} > /dev/null || ${CRON_SCRIPT}") | crontab -
+    # 每30分钟检查 Nezha Dashboard 是否运行
+    if ! crontab -l | grep -qF "*/30 * * * * pgrep -f ${SCRIPT} > /dev/null || ${CRON_SCRIPT}"; then
+        (crontab -l; echo "*/30 * * * * pgrep -f ${SCRIPT} > /dev/null || ${CRON_SCRIPT}") | crontab -
     fi
 
 else
