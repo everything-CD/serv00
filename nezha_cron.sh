@@ -2,7 +2,7 @@
 
 ####### nezha #################
 USER=$(whoami)
-WORKDIR="/home/${USER,,}/.nezha-dashboard"
+WORKDIR="/home/${USER,,}/nezhapanel"
 SCRIPT="${WORKDIR}/start.sh"
 CRON_SCRIPT="nohup ${SCRIPT} >/dev/null 2>&1 &"
 #### nezha-agent #######################
